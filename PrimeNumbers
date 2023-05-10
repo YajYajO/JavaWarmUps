@@ -1,0 +1,36 @@
+import java.util.*;
+
+public class PrimeNumbers {
+
+	public static void main(String[] args) {
+		int max = 0;
+		int weirdNum = 0;
+		int count = 0;
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Give Max");
+		max = scan.nextInt();
+		
+		
+		
+		for(int i = 0; i <= max; i++) {
+			for(int j = 1; j <= i; j++)
+				if(i % j == 0 && (j != 1 || j != i)) {
+					//definitely not prime
+					weirdNum++;
+					
+				}
+				else {
+					//may be prime
+				}
+			if(weirdNum == 2) {
+				System.out.println(i);
+				count++;
+			}
+			//System.out.println(weirdNum);
+			weirdNum = 0;
+		}
+		System.out.println("The amount of primes: " + count);
+		}
+		
+
+	}
