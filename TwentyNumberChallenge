@@ -3,7 +3,7 @@ import java.util.*;
 
 /*Inspired by "The Twenty Number Challenge" shown on TikTok
 *This challenge is completed by successfully ordering 20 random integers in an array
-*Good Luck!!! Made by Jon-Joel Ocfemia
+*Good Luck!!!
 */
 
 
@@ -38,6 +38,12 @@ public class TwentyNumberChallenge {
                     }
                     if(isNotOrdered(list)){
                         System.out.println("Your list is not ordered, you have failed the twenty number challenge:(");
+                        i = 20;
+                    }
+                }
+                else if(list.get(0) != null){
+                    if(list.get(0) > givenRandom){
+                        System.out.println(givenRandom + " does not fit in your list, you have failed :(");
                         i = 20;
                     }
                 }
@@ -134,3 +140,4 @@ public class TwentyNumberChallenge {
     }
 
 }
+
