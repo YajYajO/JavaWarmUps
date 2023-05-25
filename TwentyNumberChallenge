@@ -1,0 +1,136 @@
+package JavaWarmUps;
+import java.util.*;
+
+/*Inspired by "The Twenty Number Challenge" shown on TikTok
+*This challenge is completed by successfully ordering 20 random integers in an array
+*Good Luck!!! Made by Jon-Joel Ocfemia
+*/
+
+
+
+public class TwentyNumberChallenge {
+    public static void main(String[] args){
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        Scanner scan = new Scanner(System.in);
+        Random rand = new Random();
+        int input = 0;
+        int givenRandom = 0;
+        for(int i = 0; i < 20; i++){
+            list.add(null);
+        }
+        for(int i = 0; i < list.size(); i++){
+            givenRandom = rand.nextInt(1000) + 1;
+            while(numRepeated(givenRandom, list)){
+                givenRandom = rand.nextInt(1000) + 1;
+            }
+            System.out.println("Where would you like to place " + givenRandom + " in your list?");
+            for(int j = 0; j < 20; j++){
+                if(j == 19 && list.get(j) != null){
+                    if(!isStillGoing(list.get(j), givenRandom)){
+                    System.out.println(givenRandom + " does not fit in your list, you have failed :(");
+                    i = 20;
+                    }
+                } 
+                else if((list.get(j) != null && list.get(j + 1) != null) && j != 19){
+                    if(!isStillGoing(list.get(j), list.get(j + 1), givenRandom)) {
+                        System.out.println(givenRandom + " does not fit in your list, you have failed :(");
+                        i = 20;
+                    }
+                    if(isNotOrdered(list)){
+                        System.out.println("Your list is not ordered, you have failed the twenty number challenge:(");
+                        i = 20;
+                    }
+                }
+ 
+             if(i == 19){
+                System.out.println("Thanks for playing! You win!");
+             }
+            }
+            input = scan.nextInt();
+            while(input < 1 || input > 20){
+                System.out.println("That number is not in your list, please give a number from 1-20");
+                input = scan.nextInt();
+            }
+            while(isOccupied(input, list) == true){
+                System.out.println("That index is already taken");
+                input = scan.nextInt();
+            }
+            list.set(input - 1, givenRandom);
+            System.out.println(toString(list));
+        }
+        System.out.println("Thanks for playing!");
+    }
+
+
+    public static boolean isStillGoing(int firstNum, int secondNum, int givenNum){
+        boolean answer = true;
+        if(firstNum < givenNum && givenNum < secondNum){
+            answer = false;
+        }
+        return answer;
+    }
+
+    public static boolean isNotOrdered(ArrayList<Integer> list){
+        boolean answer = false;
+        int last = 0;
+        for(int i = 0; i < list.size(); i++){
+            if(list.get(i) != null){
+                if(last > list.get(i)){
+                    answer = true;
+                }
+                last = list.get(i);
+
+            }
+
+        }
+        return answer;
+
+    }
+
+    public static boolean numRepeated(int givenNum, ArrayList<Integer> list){
+        boolean answer = false;
+        for(int i = 0; i < list.size(); i++){
+            if(list.get(i) != null){
+                //Not null
+                if(list.get(i) == givenNum){
+                    answer = true;
+                }
+            }
+            }
+        return answer;
+    }
+
+    public static boolean isStillGoing(int topNum, int givenNum){
+        boolean answer = true;
+
+        if(topNum < givenNum){
+            answer = false;
+        }
+
+        return answer;
+    }
+
+    public static boolean isOccupied(int wantedIndex, ArrayList<Integer> list){
+        boolean answer = true;
+        if(list.get(wantedIndex - 1) == null){
+            answer = false;
+        }
+
+        return answer;
+    }
+
+    
+    public static String toString(ArrayList<Integer> list){
+        String output = "Your current list: \n";
+        for(int i = 0; i < list.size(); i++){
+            if(list.get(i) == null){
+                output = output + (i + 1) + ": \n";
+            }
+            else{
+                output = output + (i + 1) + ": " + list.get(i) + "\n";
+            }
+        }
+        return output;
+    }
+
+}
